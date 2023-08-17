@@ -4,6 +4,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
+
+    <PackageId>MovesenseBindingiOS</PackageId>
+    <Version>3.15.0.0-beta</Version>
+    <Authors>Anze Vodovnik, Andy Wigley, Morten Liland</Authors>
+    <Description>.NET binding for Movesense iOS mdslib</Description>
+
+    <RootNamespace>Movesense</RootNamespace>
+    <PackOnBuild>true</PackOnBuild> <!-- This does not seem to work no package is beeing created --> 
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +23,15 @@
     <NativeReference Include="libmds.a">
       <Kind>Static</Kind>
       <SmartLink>False</SmartLink>
+      <IsCxx>True</IsCxx>
+      <ForceLoad>True</ForceLoad>
+      <LinkTargets>ArmV7;Arm64;Simulator;Simulator64</LinkTargets>
+      <LinkerFlags>-lz</LinkerFlags>
+      <Frameworks>Security, CoreBluetooth, CoreFoundation</Frameworks>
     </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="libmds.linkwith.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="libmds.a" />
